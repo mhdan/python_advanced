@@ -8,3 +8,5 @@ print("i changed csv file alse but i use git diff and check out for it\nfinally 
 print("now i test <git reset> command for undo the changes for some file in stage!!!")
 
 print("now i add three text files to practice brach and merge after it")
+
+print("braching and <git rm filename> to delete from git and file system!\nalso <git -d branchname> for deleting brach")
