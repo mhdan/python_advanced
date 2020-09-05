@@ -10,3 +10,5 @@ print("now i test <git reset> command for undo the changes for some file in stag
 print("now i add three text files to practice brach and merge after it")
 
 print("braching and <git rm filename> to delete from git and file system!\nalso <git -d branchname> for deleting brach")
+
+print("first commit after merging with remote")
