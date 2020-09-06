@@ -12,3 +12,5 @@ print("now i add three text files to practice brach and merge after it")
 print("braching and <git rm filename> to delete from git and file system!\nalso <git -d branchname> for deleting brach")
 
 print("first commit after merging with remote")
+
+print("first tag i set now, first version of this project.\ntag v1.0 is here")
