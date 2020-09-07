@@ -14,3 +14,5 @@ print("braching and <git rm filename> to delete from git and file system!\nalso 
 print("first commit after merging with remote")
 
 print("first tag i set now, first version of this project.\ntag v1.0 is here")
+
+print("i want to commit and sign it with secret gpg key and after it tag to v2,2 with signing key again!!!")
