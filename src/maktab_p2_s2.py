@@ -74,42 +74,85 @@
 
 ###############################################
 
-class Person:
-    count = 0   # this is static variable!!! (class variable)
+# class Person:
+#     count = 0   # this is static variable!!! (class variable)
 
-    # constructor of this calss (in python it defines with "__init__")
-    # all class methodes in python get "self" parameter!!!
-    def __init__(self, name, age):
-        # instanse variable should refrence with "self."
-        self.name = name
-        self.age = age
-        # static variable should refrence with "class name."
-        Person.count += 1
+#     # constructor of this calss (in python it defines with "__init__")
+#     # all class methodes in python get "self" parameter!!!
+#     def __init__(self, name, age):
+#         # instance variable should refrence with "self."
+#         self.name = name
+#         self.age = age
+#         # static variable should refrence with "class name."
+#         Person.count += 1
 
-    # this is static method in python and it doesn't get "self" parameter!!!
-    # the "@..." is anotating and it is optional!!
-    @staticmethod
-    def get_count():
-        return Person.count
+#     # this is static method in python and it doesn't get "self" parameter!!!
+#     # the "@..." is anotating and it is optional!!
+#     @staticmethod
+#     def get_count():
+#         return Person.count
 
-    # all class methodes in python get "self" parameter!!!
-    def get_name(self):
-        return self.name
+#     # all class methodes in python get "self" parameter!!!
+#     def get_name(self):
+#         return self.name
 
-    def get_age(self):
-        return self.age
+#     def get_age(self):
+#         return self.age
 
-    def info(self):
-        print("the name is %s and age is %i"
-              % (self.get_name(), self.get_age()))
+#     def info(self):
+#         print("the name is %s and age is %i"
+#               % (self.get_name(), self.get_age()))
 
 
-jadi = Person("jadi mirmirani", 40)
-print("age -> %i" % (jadi.get_age()))
-jadi.info()
-print(Person.get_count())
+# jadi = Person("jadi mirmirani", 40)
+# print("age -> %i" % (jadi.get_age()))
+# jadi.info()
+# print(Person.get_count())
 
-mohammad = Person("mohammad ziaei", 22)
-print("this person is me and my name is %s and age is %i"
-      % (mohammad.get_name(), mohammad.get_age()))
-mohammad.info()
+# mohammad = Person("mohammad ziaei", 22)
+# print("this person is me and my name is %s and age is %i"
+#       % (mohammad.get_name(), mohammad.get_age()))
+# mohammad.info()
+
+###############################################
+
+class Computer:
+    counter = 0
+
+    def __init__(self, cpu, ram, hard):
+        Computer.counter += 1
+        self.cpu = cpu
+        self.ram = ram
+        self.hard = hard
+
+    def get_value(self):
+        return self.cpu + self.ram + self.hard
+
+    # "__del__(self)" function will call automaticly when we use "del" on something!!!
+    # alse python garbage collectore always when the program finished, call "__del__" for each instance!!
+    def __del__(self):
+        Computer.counter -= 1
+        print("this computer deleted!!!")
+
+
+# with this syntax we can use inheritance
+class Laptop(Computer):
+    def __init__(self, cpu, ram, hard, vazn):
+        # now with this syntax we first call super constructore (yadet nare constructor super())
+        # second we can add some additional paramerters to it.
+        super().__init__(cpu, ram, hard)
+        self.vazn = vazn
+
+    def get_value(self):
+        return (self.cpu + self.ram + self.hard + self.vazn) * 1.5
+
+
+pc1 = Computer(5, 6, 1)
+print(pc1.get_value())
+
+notebook1 = Laptop(7, 16, 0.5, 2)
+print(notebook1.get_value())
+print(Computer.counter)
+del notebook1
+print(Computer.counter)
+# after the program finished, garbage collectore run "__del__" for pc1 instance too!!!
