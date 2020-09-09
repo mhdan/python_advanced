@@ -52,9 +52,26 @@
 
 ###############################################
 
+##**** generatore functions in python with "yield"
+##**** "yield" is same as "return", but the fuction will be generator function!
+##**** it remember the previous state and continue to next "yield"
+##**** it is good for case tha we work with huge data or call with unlimited or unknown args!!!
 
+def firstTon(n):
+    # i = 0
+    # while i < n:
+    #     yield i
+    #     i += 1
+    for num in range(0, 10):
+        yield num
 
+# for i in firstTon(10):
+#     print(i)
 
+print(firstTon(10))
+print(firstTon(10))
+for i in firstTon(10):
+    print(i)
 
 
 
