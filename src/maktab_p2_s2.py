@@ -65,13 +65,14 @@ def firstTon(n):
     for num in range(0, 10):
         yield num
 
-# for i in firstTon(10):
-#     print(i)
+print(firstTon(10))
+# output : <generator object firstTon at 0x7ff7c4356eb0>
 
-print(firstTon(10))
-print(firstTon(10))
+# we can use func generatore only with iterables 
 for i in firstTon(10):
     print(i)
+
+###############################################
 
 
 
