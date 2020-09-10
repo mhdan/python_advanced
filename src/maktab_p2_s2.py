@@ -116,43 +116,109 @@
 
 ###############################################
 
-class Computer:
+# class Computer:
+#     counter = 0
+
+#     def __init__(self, cpu, ram, hard):
+#         Computer.counter += 1
+#         self.cpu = cpu
+#         self.ram = ram
+#         self.hard = hard
+
+#     def get_value(self):
+#         return self.cpu + self.ram + self.hard
+
+#     # "__del__(self)" function will call automaticly when we use "del" on something!!!
+#     # alse python garbage collectore always when the program finished, call "__del__" for each instance!!
+#     def __del__(self):
+#         Computer.counter -= 1
+#         print("this computer deleted!!!")
+
+
+# # with this syntax we can use inheritance
+# class Laptop(Computer):
+#     def __init__(self, cpu, ram, hard, vazn):
+#         # now with this syntax we first call super constructore (yadet nare constructor super())
+#         # second we can add some additional paramerters to it.
+#         super().__init__(cpu, ram, hard)
+#         self.vazn = vazn
+
+#     def get_value(self):
+#         return (self.cpu + self.ram + self.hard + self.vazn) * 1.5
+
+
+# pc1 = Computer(5, 6, 1)
+# print(pc1.get_value())
+
+# notebook1 = Laptop(7, 16, 0.5, 2)
+# print(notebook1.get_value())
+# print(Computer.counter)
+# del notebook1
+# print(Computer.counter)
+# # after the program finished, garbage collectore run "__del__" for pc1 instance too!!!
+
+###############################################
+
+# **** this code has Pseudo code and it is just useful example for OOP !!!
+class Device:
     counter = 0
 
-    def __init__(self, cpu, ram, hard):
-        Computer.counter += 1
-        self.cpu = cpu
-        self.ram = ram
-        self.hard = hard
+    def __init__(self, name, ip, mac):
+        self.name = name
+        self.ip_address = ip
+        self.mac = mac
+        Device.counter += 1
+        # result = ping to the self.ip_address to check the status
+        if result:
+            self.status = 'active'
+        else:
+            self.status = 'unknown'
 
-    def get_value(self):
-        return self.cpu + self.ram + self.hard
-
-    # "__del__(self)" function will call automaticly when we use "del" on something!!!
-    # alse python garbage collectore always when the program finished, call "__del__" for each instance!!
-    def __del__(self):
-        Computer.counter -= 1
-        print("this computer deleted!!!")
-
-
-# with this syntax we can use inheritance
-class Laptop(Computer):
-    def __init__(self, cpu, ram, hard, vazn):
-        # now with this syntax we first call super constructore (yadet nare constructor super())
-        # second we can add some additional paramerters to it.
-        super().__init__(cpu, ram, hard)
-        self.vazn = vazn
-
-    def get_value(self):
-        return (self.cpu + self.ram + self.hard + self.vazn) * 1.5
+    def get_status(self):
+        # return the status base on the ping and accessbility
+        pass
 
 
-pc1 = Computer(5, 6, 1)
-print(pc1.get_value())
+class Tv(Device):
+    counter = 0
 
-notebook1 = Laptop(7, 16, 0.5, 2)
-print(notebook1.get_value())
-print(Computer.counter)
-del notebook1
-print(Computer.counter)
-# after the program finished, garbage collectore run "__del__" for pc1 instance too!!!
+    def __init__(self, name, ip, mac):
+        super().__init__(name, ip, mac)
+        Tv.counter += 1
+
+    def turn_on(self):
+        # connect to the self.ip_address and turn it on !!!
+        pass
+
+    def turn_off(self):
+        # connect to the self.ip_address and turn it off !!!
+        pass
+
+
+class Thermo(Device):
+    counter = 0
+
+    def __init__(self, name, ip, mac):
+        super().__init__(name, ip, mac)
+        Thermo.counter += 1
+
+    def get_temperature(self):
+        # read temperature and return it's result!!!
+        pass
+
+
+class Smart_Tv(Tv):
+    counter = 0
+
+    def __init__(self, name, ip, mac, os):
+        super().__init__(name, ip, mac)
+        self.os = os
+        Smart_Tv.counter += 1
+
+    def update_os(self):
+        # update the os and return the result!!!
+        pass
+
+
+my_tv = Smart_Tv("sony", 198168001, "adfeXXh", "android")
+my_tv.update_os()
