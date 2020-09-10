@@ -169,10 +169,10 @@ class Device:
         self.mac = mac
         Device.counter += 1
         # result = ping to the self.ip_address to check the status
-        if result:
-            self.status = 'active'
-        else:
-            self.status = 'unknown'
+        # if result:
+        #     self.status = 'active'
+        # else:
+        #     self.status = 'unknown'
 
     def get_status(self):
         # return the status base on the ping and accessbility
