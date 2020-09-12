@@ -109,39 +109,21 @@ import re
 # # output: the name is amir hosein     and family is ziaei     !
 
 ###############################################
+###############################################
 
+import requests
 
+# # API URL: https://api.livecoin.net/
 
+# # requests.get(url, params={key: value}, args)
+# # requests.get(url, auth = ('user', 'pass'))
 
+# r = requests.get("https://api.livecoin.net/exchange/ticker?currencyPair=BTC/USD")
+# print(r.status_code)
+# print("the type is :%s -> %s" %(type(r.text), r.text))
+# # json is same as dict in python :)
+# j = r.json()
+# print("the type is :%s -> %s" %(type(j), j))
+# print("max value is %s and min is %s" %(j['high'], j['low']))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+###############################################
