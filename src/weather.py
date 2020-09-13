@@ -28,12 +28,12 @@ def sending_req(city):
         r = requests.get(endpoint, paramerters)
         # next statement make code to raise exception if HTTP error happen
         r.raise_for_status()
-    except requests.exceptions.Timeout:
+    except requests.Timeout:
         print("maybe your internet connection was interrupt\nplease check your internet connection and then try again!")
         exit(-1)
-    except requests.exceptions.RequestException as e:
+    except requests.RequestException as e:
         raise SystemExit(e)
-    except requests.exceptions.HTTPError as err:
+    except requests.HTTPError as err:
         raise SystemExit(err)
 
     return r.json()
