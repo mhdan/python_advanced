@@ -33,7 +33,7 @@ def sending_req(city):
         exit(-1)
     except requests.exceptions.RequestException as e:
         raise SystemExit(e)
-    except requests.exception.HTTPError as err:
+    except requests.exceptions.HTTPError as err:
         raise SystemExit(err)
 
     return r.json()
