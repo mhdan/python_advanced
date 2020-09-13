@@ -81,7 +81,7 @@ def print_result(res_dic):
     # print("\n", raw_data['id'])
 
 
-city_name = input("Enter your city: ")
+city_name = input("Enter your city:\n")
 raw_data = sending_req(city_name)
 item_dic = extracting_data(raw_data)
 print_result(item_dic)
