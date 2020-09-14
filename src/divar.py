@@ -28,7 +28,7 @@ def sending_req(search, price):
         r = requests.get(endpoint, parameters)
         # next statement make code to raise exception if HTTP error happen
         r.raise_for_status()
-    except requests.Timeout:
+    except (requests.Timeout, requests.ConnectionError):
         # catch timeout error!
         print("maybe your internet connection was interrupt\nplease check your internet connection and then try again!")
         exit(-1)

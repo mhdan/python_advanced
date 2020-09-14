@@ -28,7 +28,7 @@ def sending_req(city):
         r = requests.get(endpoint, paramerters)
         # next statement make code to raise exception if HTTP error happen
         r.raise_for_status()
-    except requests.Timeout:
+    except (requests.Timeout, requests.ConnectionError):
         print("maybe your internet connection was interrupt\nplease check your internet connection and then try again!")
         exit(-1)
     except requests.RequestException as e:
@@ -56,7 +56,6 @@ def extracting_data(data):
 
     # dic ['speed'], ['deg']
     res_dict['wind_speed'] = data['wind']['speed']
-    # dic ['speed'], ['deg']
     res_dict['wind_deg'] = data['wind']['deg']
 
     return res_dict
