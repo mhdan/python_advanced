@@ -99,6 +99,32 @@ def storing_in_databse(list_of_dictes):
         cnx.close()
 
 
+def showing_database():
+    try:
+        print("connecting to mysql")
+        cnx = mysql.connector.connect(user='me_learning', password='Mohammad@1377',
+                                      host='127.0.0.1',
+                                      database='learn')
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("username or password is wrong")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("maybe the database does not exist!!!")
+        else:
+            print(err)
+    else:
+        print("connected to mysql!!!")
+        query1 = "SELECT * FROM divar"
+        cursor.execute(query1)
+        for row in cursor:
+            print(row)
+            print("---------------------------------------------")
+    finally:
+        cursor.close()
+        cnx.close()
+
+
 def printing_result(list_of_dictes):
     print(f"date of search: {list_of_dictes[0]}\n")
     for each_dic in list_of_dictes[1:]:
@@ -112,3 +138,5 @@ text_data = sending_req(search_item, price)
 list_of_dictes = extracting_data(text_data)
 storing_in_databse(list_of_dictes)
 printing_result(list_of_dictes)
+
+# showing_database()
