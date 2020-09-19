@@ -2,6 +2,10 @@
 
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
+from dateutil import tz
+import mysql.connector
+from mysql.connector import errorcode
 
 
 def get_data_from_user():
@@ -46,6 +50,7 @@ def extracting_data(text_data):
     items_list = soup.find_all(
         'a', attrs={'class': 'kt-post-card kt-post-card--outlined kt-post-card--bordered'})
     res_list = []
+    res_list.append(datetime.now(tz=tz.tzlocal()))
     for item in items_list:
         name = item.find(
             'div', attrs={'class': 'kt-post-card__title'}).text    # name
@@ -65,8 +70,38 @@ def extracting_data(text_data):
     return res_list
 
 
+def storing_in_databse(list_of_dictes):
+    try:
+        print("connecting to mysql database")
+        cnx = mysql.connector.connect(user='me_learning', password='Mohammad@1377',
+                                      host='127.0.0.1', database='learn')
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("something is wrong with username or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+    else:
+        print("connected to mysql database")
+        cursor.execute(
+            "CREATE TABLE IF NOT EXISTS learn.divar ( search_date VARCHAR(40), name VARCHAR(70), price VARCHAR(20), location VARCHAR(70), link VARCHAR(200));")
+        # create table if doesn't exist !!!
+        sq1 = "INSERT INTO divar (search_date, name, price, location, link) VALUES (%s, %s, %s, %s, %s)"
+        for each_dict in list_of_dictes[1:]:
+            this_row = [list_of_dictes[0], each_dict['name'],
+                        each_dict['price'], each_dict['location'], each_dict['link']]
+            cursor.execute(sq1, this_row)
+        cnx.commit()
+    finally:
+        cursor.close()
+        cnx.close()
+
+
 def printing_result(list_of_dictes):
-    for each_dic in list_of_dictes:
+    print(f"date of search: {list_of_dictes[0]}\n")
+    for each_dic in list_of_dictes[1:]:
         print("name: %s\nprice: %s\nlocation: %s\nlink: %s"
               % (each_dic['name'], each_dic['price'], each_dic['location'], each_dic['link']))
         print("---------------------------------------------------")
@@ -75,4 +110,5 @@ def printing_result(list_of_dictes):
 search_item, price = get_data_from_user()
 text_data = sending_req(search_item, price)
 list_of_dictes = extracting_data(text_data)
+storing_in_databse(list_of_dictes)
 printing_result(list_of_dictes)
